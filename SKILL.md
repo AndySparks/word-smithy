@@ -47,6 +47,76 @@ If any are found, acknowledge them:
 
 This ensures word-smithy layers on top of what the user already has rather than replacing it. Users do not need to migrate existing rules into word-smithy's format for them to be respected.
 
+### Step 1c: First-Run Check
+
+After loading configs and discovering context, check whether anything meaningful was found. Specifically:
+
+1. Do the `voice` paths in the config(s) point to files that actually exist?
+2. Was any writing context discovered in Step 1b (CLAUDE.md, .cursorrules, etc.)?
+
+**If no voice file exists AND no external writing context was found**, the user has nothing loaded. Enter onboarding mode instead of proceeding to Step 2.
+
+**If a voice file exists** (or meaningful writing context was found in Step 1b), skip onboarding and proceed to Step 2.
+
+### Step 1d: Onboarding (first-run only)
+
+When onboarding is triggered, walk the user through creating a minimal voice profile. Don't send them to the guide. Do it here, interactively.
+
+Say:
+
+> word-smithy is installed, but you don't have a voice profile yet. That's the thing that keeps your AI from sounding like a robot.
+>
+> Want to set one up now? Takes about five minutes.
+
+If the user says no, proceed to Step 2 with no voice loaded (the skill still works, just without voice guardrails).
+
+If the user says yes, walk through these four steps:
+
+**1. Collect samples**
+
+> Paste 2-3 short pieces of writing you're proud of. Emails, blog posts, social posts, anything. I need to hear what you sound like.
+
+Read what they provide. Identify patterns: sentence length habits, vocabulary preferences, structural tendencies, tone.
+
+**2. Confirm the patterns**
+
+Present what you found:
+
+> Here's what I'm noticing in your writing:
+> - [structural pattern, e.g., "You lead with the problem, not the solution"]
+> - [sentence pattern, e.g., "Short sentences mixed with longer ones, lots of contractions"]
+> - [vocabulary pattern, e.g., "Plain words, no jargon"]
+>
+> Does that sound right? Anything I'm missing?
+
+Let them correct or add. This is collaborative, not prescriptive.
+
+**3. Hard bans**
+
+> What words or phrases do you never want to see in your writing? Things that make you cringe when AI produces them.
+>
+> Common ones people ban: "leverage," "utilize," "Furthermore," "It's worth noting," "It's not X. It's Y."
+
+Collect their list.
+
+**4. Save the profile**
+
+Write the voice profile to `~/.claude/shared/voice-core.md` (or whatever path their config specifies). Use the structure from the [Creating a Voice Profile](guides/creating-a-voice-profile.md) guide. Confirm:
+
+> Saved your voice profile to `~/.claude/shared/voice-core.md`. It's loaded now and will be loaded every time you invoke `/word-smithy`.
+>
+> This is a living document. Next time something sounds off, tell me and I'll update it.
+
+Then proceed to Step 2.
+
+**After onboarding, offer next steps (don't block on them):**
+
+> Your voice profile is set. Two optional things when you have time:
+> - **Condense a writing book** you love into an AI reference (see `guides/condensing-a-book.md`)
+> - **Write a protocol** for a workflow you repeat (see `guides/writing-a-protocol.md`)
+>
+> For now, let's write something.
+
 ### Step 2: Ask the Question
 
 Ask the user:
