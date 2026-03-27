@@ -8,6 +8,10 @@ description: >
   and other tool configs. Invoke for any writing task, even if you're unsure which process
   to follow. Triggers: write, draft, edit, polish, publish, blog, email, social, card,
   essay, dispatch, copy, prose, editorial, voice check, McPhee Loop.
+license: MIT
+metadata:
+  author: andysparks
+  version: "1.0"
 ---
 
 # /word-smithy

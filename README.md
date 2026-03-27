@@ -19,10 +19,10 @@ For the full story behind word-smithy, see [Smithing Words](https://www.manageme
 **1. Install**
 
 ```bash
-git clone https://github.com/andysparks/word-smithy.git
-cd word-smithy
-./install.sh claude    # or: codex, cursor, all
+npx skills add andysparks/word-smithy
 ```
+
+Supports Claude Code, Codex, Cursor, and [40+ other agents](https://skills.sh).
 
 **2. Create a voice profile**
 
