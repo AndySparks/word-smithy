@@ -1,4 +1,4 @@
-# word-smithy
+# Word Smithy
 
 Turn your AI assistant into an editorial workshop.
 
