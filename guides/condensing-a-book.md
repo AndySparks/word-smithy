@@ -109,16 +109,16 @@ The full file should follow this structure:
 Drop the file in your shared writing references directory:
 
 ```
-~/.claude/shared/writing-references/zinsser.md
-~/.claude/shared/writing-references/king.md
-~/.claude/shared/writing-references/mcphee.md
+[shared-root]/writing-references/zinsser.md
+[shared-root]/writing-references/king.md
+[shared-root]/writing-references/mcphee.md
 ```
 
 Then make sure your word-smithy config points to this directory:
 
 ```yaml
 references:
-  - ~/.claude/shared/writing-references/
+  - [shared-root]/writing-references/
 ```
 
 ## How word-smithy Uses It

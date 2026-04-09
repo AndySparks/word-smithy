@@ -133,9 +133,10 @@ Include examples from your actual writing wherever you can. The more examples th
 
 ## Where to Put It
 
-For a voice profile that applies across all your projects:
+For a voice profile that applies across all your projects, save it in your harness's shared location. Common examples:
 
 ```
+~/.agents/voice-core.md
 ~/.claude/shared/voice-core.md
 ```
 
@@ -149,7 +150,7 @@ Then point to it in your word-smithy config:
 
 ```yaml
 voice:
-  - ~/.claude/shared/voice-core.md        # shared
+  - [shared-root]/voice-core.md           # shared
   - docs/voice-profile.md                 # project-specific
 ```
 

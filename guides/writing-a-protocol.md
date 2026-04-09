@@ -15,7 +15,7 @@ triggers: polish blog post, final pass, blog cleanup, proofread post
 description: Three-pass polish for a blog post before publishing
 layer: shared
 loads:
-  - ~/.claude/shared/writing-references/zinsser.md
+  - [shared-root]/writing-references/zinsser.md
 ---
 ```
 
@@ -31,7 +31,7 @@ The body of the file is the workflow itself. Write it however makes sense for th
 
 ## Where Protocols Live
 
-**Shared protocols** live in a directory you point to from your shared config (`~/.claude/shared/word-smithy/config.md`). These are available in every project. Good candidates: your blog polish process, your email editing checklist, your social media workflow.
+**Shared protocols** live in a directory you point to from your shared config. Common shared config locations are `~/.agents/word-smithy/config.md` and `~/.claude/shared/word-smithy/config.md`. These are available in every project. Good candidates: your blog polish process, your email editing checklist, your social media workflow.
 
 **Project protocols** live in a directory you point to from your project config (`.word-smithy/config.md`). These only load when you're working inside that project. Good candidates: a card-writing process specific to your product, a release notes workflow, a docs style guide.
 
@@ -77,7 +77,7 @@ triggers: polish blog post, final pass, blog cleanup, proofread post
 description: Three-pass polish for a blog post before publishing
 layer: shared
 loads:
-  - ~/.claude/shared/writing-references/zinsser.md
+  - [shared-root]/writing-references/zinsser.md
 ---
 
 # Blog Post Polish
@@ -117,8 +117,8 @@ triggers: write a post, draft a piece, long-form writing, write an essay
 description: Full drafting workflow from outline through polish
 layer: shared
 loads:
-  - ~/.claude/shared/writing-references/mcphee.md
-  - ~/.claude/shared/writing-references/zinsser.md
+  - [shared-root]/writing-references/mcphee.md
+  - [shared-root]/writing-references/zinsser.md
 ---
 
 # Long-Form Draft
