@@ -10,7 +10,7 @@ You write with AI, but every session starts from zero. The AI doesn't know your 
 
 word-smithy is a skill for AI coding assistants that routes any writing task to the right workflow, voice docs, and references. You define your voice once, condense your favorite writing books into structured references, and build repeatable editorial protocols. word-smithy discovers all of it and applies it every time you write.
 
-It works with [Claude Code](https://docs.anthropic.com/en/docs/claude-code), [Codex](https://github.com/openai/codex), and [Cursor](https://cursor.sh).
+It works with [Claude Code](https://docs.anthropic.com/en/docs/claude-code), [Codex](https://github.com/openai/codex), [Cursor](https://cursor.sh), and AGENTS-based harnesses like OpenCode.
 
 For the full story behind word-smithy, see [Smithing Words](https://www.managementcraft.co/dispatches/smithing-words).
 
@@ -30,7 +30,7 @@ Follow the [Creating a Voice Profile](guides/creating-a-voice-profile.md) guide.
 
 **3. Invoke it**
 
-In Claude Code:
+In your agentic assistant:
 ```
 /word-smithy
 ```
@@ -41,7 +41,7 @@ word-smithy asks what you're working on, matches it to a protocol if one exists,
 
 word-smithy uses layered discovery to find your editorial context:
 
-- **Shared config** (`~/.claude/shared/word-smithy/config.md`): Voice docs, references, and protocols that apply across all your projects.
+- **Shared config**: Voice docs, references, and protocols that apply across all your projects. Common locations include `~/.agents/word-smithy/config.md` and `~/.claude/shared/word-smithy/config.md`.
 - **Project config** (`.word-smithy/config.md` in your project root): Voice docs, references, and protocols specific to one project.
 
 Both layers load together. Project-level configs win when they conflict with shared configs.
@@ -56,7 +56,12 @@ When you invoke `/word-smithy`:
 
 ## Already Have Writing Rules?
 
-If you've already defined voice, tone, or style rules in `CLAUDE.md`, `.cursorrules`, or `.github/copilot-instructions.md`, word-smithy finds and uses them automatically. You don't need to migrate anything. word-smithy layers on top of what you already have.
+If you've already defined voice, tone, or style rules in `AGENTS.md`, `CLAUDE.md`, `.cursorrules`, or `.github/copilot-instructions.md`, word-smithy finds and uses them automatically. You don't need to migrate anything. word-smithy layers on top of what you already have.
+
+## Shared Config Locations
+
+- AGENTS-based harnesses: `~/.agents/word-smithy/config.md`
+- Claude Code: `~/.claude/shared/word-smithy/config.md`
 
 ## Guides
 
@@ -68,14 +73,17 @@ If you've already defined voice, tone, or style rules in `CLAUDE.md`, `.cursorru
 
 word-smithy uses two config files, both optional:
 
-**Shared** (`~/.claude/shared/word-smithy/config.md`):
+**Shared** (use your harness's shared config location):
+
+Here and in all documentation, `[shared-root]` means the shared location for your harness, for example `~/.agents` or `~/.claude/shared`.
+
 ```yaml
 voice:
-  - ~/.claude/shared/voice-core.md
+  - [shared-root]/voice-core.md
 references:
-  - ~/.claude/shared/writing-references/
+  - [shared-root]/writing-references/
 protocols:
-  - ~/.claude/shared/my-editing-process.md
+  - [shared-root]/my-editing-process.md
 ```
 
 **Project** (`.word-smithy/config.md`):
@@ -99,7 +107,7 @@ triggers: polish blog post, final pass, blog cleanup
 description: Three-pass polish for a blog post before publishing
 layer: shared
 loads:
-  - ~/.claude/shared/writing-references/zinsser.md
+  - [shared-root]/writing-references/zinsser.md
 ---
 
 # Blog Post Polish

@@ -4,7 +4,7 @@ triggers: polish blog post, final pass, blog cleanup, proofread post
 description: Three-pass polish for a blog post before publishing
 layer: shared
 loads:
-  - ~/.claude/shared/writing-references/zinsser.md
+  - [shared-root]/writing-references/zinsser.md
 ---
 
 # Blog Post Polish

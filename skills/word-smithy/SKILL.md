@@ -4,10 +4,10 @@ description: >
   Universal editorial skill. Use when writing anything: blog posts, emails, social media,
   card content, or any prose. Routes to the right editorial workflow based on what you're
   working on. Discovers voice docs, writing references, and editorial protocols from shared
-  and project configs. Also detects existing writing context in CLAUDE.md, .cursorrules,
-  and other tool configs. Invoke for any writing task, even if you're unsure which process
-  to follow. Triggers: write, draft, edit, polish, publish, blog, email, social, card,
-  essay, dispatch, copy, prose, editorial, voice check, McPhee Loop.
+  and project configs. Also detects existing writing context in AGENTS.md, CLAUDE.md,
+  .cursorrules, and other tool configs. Invoke for any writing task, even if you're unsure
+  which process to follow. Triggers: write, draft, edit, polish, publish, blog, email,
+  social, card, essay, dispatch, copy, prose, editorial, voice check, McPhee Loop.
 license: MIT
 metadata:
   author: andysparks
@@ -24,7 +24,12 @@ The editorial workshop. One entry point for all writing workflows.
 
 Read the shared config and project config (if present) to discover all available resources.
 
-**Shared config location:** `~/.claude/shared/word-smithy/config.md`
+**Shared config locations to check, in order:**
+- `~/.agents/word-smithy/config.md`
+- `~/.claude/shared/word-smithy/config.md`
+
+Use the first one that exists.
+
 **Project config location:** `.word-smithy/config.md` in the current project root
 
 From each config, load:
@@ -37,6 +42,8 @@ Do NOT load references or protocol bodies yet. Those are loaded on demand.
 
 Scan for writing-related context that exists outside word-smithy's own configs:
 
+- `AGENTS.md` in the project root (look for voice, style, tone, or writing sections)
+- `~/.agents/AGENTS.md` (global rules for AGENTS-based harnesses)
 - `CLAUDE.md` in the project root (look for voice, style, tone, or writing sections)
 - `.claude/rules/` files that mention writing, voice, editorial, or style
 - `~/.claude/CLAUDE.md` (global rules)
@@ -56,7 +63,7 @@ This ensures word-smithy layers on top of what the user already has rather than 
 After loading configs and discovering context, check whether anything meaningful was found. Specifically:
 
 1. Do the `voice` paths in the config(s) point to files that actually exist?
-2. Was any writing context discovered in Step 1b (CLAUDE.md, .cursorrules, etc.)?
+2. Was any writing context discovered in Step 1b (AGENTS.md, CLAUDE.md, .cursorrules, etc.)?
 
 **If no voice file exists AND no external writing context was found**, the user has nothing loaded. Enter onboarding mode instead of proceeding to Step 2.
 
@@ -105,9 +112,18 @@ Collect their list.
 
 **4. Save the profile**
 
-Write the voice profile to `~/.claude/shared/voice-core.md` (or whatever path their config specifies). Use the structure from the [Creating a Voice Profile](guides/creating-a-voice-profile.md) guide. Confirm:
+Write the voice profile to the shared voice path from their config.
 
-> Saved your voice profile to `~/.claude/shared/voice-core.md`. It's loaded now and will be loaded every time you invoke `/word-smithy`.
+If no shared config exists yet:
+- In AGENTS-based harnesses, create `~/.agents/word-smithy/config.md` and save the voice profile to `~/.agents/voice-core.md`.
+- In Claude Code, create `~/.claude/shared/word-smithy/config.md` and save the voice profile to `~/.claude/shared/voice-core.md`.
+- If you cannot tell which harness the user is using, ask one short question before saving anything.
+
+When creating a new shared config during onboarding, make sure it points to the voice file you just saved so future `/word-smithy` invocations discover it automatically.
+
+Use the structure from the [Creating a Voice Profile](guides/creating-a-voice-profile.md) guide. Confirm:
+
+> Saved your voice profile to `[path]`. It's loaded now and will be loaded every time you invoke `/word-smithy`.
 >
 > This is a living document. Next time something sounds off, tell me and I'll update it.
 
