@@ -1,10 +1,11 @@
 ---
+# Shared protocol example for AGENTS.md-based tools.
 name: Blog Post Polish
 triggers: polish blog post, final pass, blog cleanup, proofread post
 description: Three-pass polish for a blog post before publishing
 layer: shared
 loads:
-  - [shared-root]/writing-references/zinsser.md
+  - ~/.agents/writing-references/zinsser.md
 ---
 
 # Blog Post Polish

@@ -10,7 +10,7 @@ You write with AI, but every session starts from zero. The AI doesn't know your 
 
 word-smithy is a skill for AI coding assistants that routes any writing task to the right workflow, voice docs, and references. You define your voice once, condense your favorite writing books into structured references, and build repeatable editorial protocols. word-smithy discovers all of it and applies it every time you write.
 
-It works with [Claude Code](https://docs.anthropic.com/en/docs/claude-code), [Codex](https://github.com/openai/codex), [Cursor](https://cursor.sh), and AGENTS-based harnesses like OpenCode.
+It works with [Claude Code](https://docs.anthropic.com/en/docs/claude-code), [Codex](https://github.com/openai/codex), [Cursor](https://cursor.sh), and other AGENTS.md-based tools such as OpenCode and Pi Agent.
 
 For the full story behind word-smithy, see [Smithing Words](https://www.managementcraft.co/dispatches/smithing-words).
 
@@ -22,7 +22,7 @@ For the full story behind word-smithy, see [Smithing Words](https://www.manageme
 npx skills add andysparks/word-smithy
 ```
 
-Supports Claude Code, Codex, Cursor, and [40+ other agents](https://skills.sh).
+Supports Claude Code, Codex, Cursor, OpenCode, Pi Agent, and [40+ other agents](https://skills.sh).
 
 **2. Create a voice profile**
 
@@ -60,8 +60,12 @@ If you've already defined voice, tone, or style rules in `AGENTS.md`, `CLAUDE.md
 
 ## Shared Config Locations
 
-- AGENTS-based harnesses: `~/.agents/word-smithy/config.md`
+- Portable shared docs for AGENTS.md-based tools: `~/.agents/word-smithy/config.md`
 - Claude Code: `~/.claude/shared/word-smithy/config.md`
+
+These are word-smithy's own shared-doc locations, separate from your harness's global rules file.
+
+If both configs exist, word-smithy uses `~/.agents/word-smithy/config.md`.
 
 ## Guides
 
@@ -75,15 +79,26 @@ word-smithy uses two config files, both optional:
 
 **Shared** (use your harness's shared config location):
 
-Here and in all documentation, `[shared-root]` means the shared location for your harness, for example `~/.agents` or `~/.claude/shared`.
+AGENTS.md-based tools:
 
 ```yaml
 voice:
-  - [shared-root]/voice-core.md
+  - ~/.agents/voice-core.md
 references:
-  - [shared-root]/writing-references/
+  - ~/.agents/writing-references/
 protocols:
-  - [shared-root]/my-editing-process.md
+  - ~/.agents/my-editing-process.md
+```
+
+Claude Code:
+
+```yaml
+voice:
+  - ~/.claude/shared/voice-core.md
+references:
+  - ~/.claude/shared/writing-references/
+protocols:
+  - ~/.claude/shared/my-editing-process.md
 ```
 
 **Project** (`.word-smithy/config.md`):
@@ -94,11 +109,13 @@ protocols:
   - docs/editorial/
 ```
 
-See [config examples](config/) for full templates.
+See the [AGENTS.md-based shared config example](config/shared-config-example-agents.md), the [Claude Code shared config example](config/shared-config-example-claude.md), and the [project config example](config/project-config-example.md).
 
 ## Protocol Format
 
 Protocols are markdown files with YAML frontmatter:
+
+AGENTS.md-based tools:
 
 ```yaml
 ---
@@ -107,7 +124,7 @@ triggers: polish blog post, final pass, blog cleanup
 description: Three-pass polish for a blog post before publishing
 layer: shared
 loads:
-  - [shared-root]/writing-references/zinsser.md
+  - ~/.agents/writing-references/zinsser.md
 ---
 
 # Blog Post Polish
@@ -115,7 +132,24 @@ loads:
 [Your workflow steps here]
 ```
 
-See the [example protocol](examples/example-protocol.md) and the [Writing a Protocol](guides/writing-a-protocol.md) guide.
+Claude Code:
+
+```yaml
+---
+name: Blog Post Polish
+triggers: polish blog post, final pass, blog cleanup
+description: Three-pass polish for a blog post before publishing
+layer: shared
+loads:
+  - ~/.claude/shared/writing-references/zinsser.md
+---
+
+# Blog Post Polish
+
+[Your workflow steps here]
+```
+
+See the [AGENTS.md-based example protocol](examples/example-protocol-agents.md), the [Claude Code example protocol](examples/example-protocol-claude.md), and the [Writing a Protocol](guides/writing-a-protocol.md) guide.
 
 ## Contributing
 

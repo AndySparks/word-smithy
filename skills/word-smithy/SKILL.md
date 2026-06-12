@@ -25,10 +25,10 @@ The editorial workshop. One entry point for all writing workflows.
 Read the shared config and project config (if present) to discover all available resources.
 
 **Shared config locations to check, in order:**
-- `~/.agents/word-smithy/config.md`
-- `~/.claude/shared/word-smithy/config.md`
+- `~/.agents/word-smithy/config.md` (portable shared-docs location for AGENTS.md-based tools)
+- `~/.claude/shared/word-smithy/config.md` (Claude Code shared folder)
 
-Use the first one that exists.
+Use the first one that exists. If both exist, `~/.agents/word-smithy/config.md` wins.
 
 **Project config location:** `.word-smithy/config.md` in the current project root
 
@@ -43,10 +43,11 @@ Do NOT load references or protocol bodies yet. Those are loaded on demand.
 Scan for writing-related context that exists outside word-smithy's own configs:
 
 - `AGENTS.md` in the project root (look for voice, style, tone, or writing sections)
-- `~/.agents/AGENTS.md` (global rules for AGENTS-based harnesses)
+- `~/.config/opencode/AGENTS.md` (OpenCode global rules)
+- `~/.codex/AGENTS.md` (Codex global rules)
 - `CLAUDE.md` in the project root (look for voice, style, tone, or writing sections)
 - `.claude/rules/` files that mention writing, voice, editorial, or style
-- `~/.claude/CLAUDE.md` (global rules)
+- `~/.claude/CLAUDE.md` (Claude Code global rules)
 - `.cursorrules` or `.github/copilot-instructions.md` (for Cursor/Copilot users)
 
 If any are found, acknowledge them:
@@ -115,7 +116,7 @@ Collect their list.
 Write the voice profile to the shared voice path from their config.
 
 If no shared config exists yet:
-- In AGENTS-based harnesses, create `~/.agents/word-smithy/config.md` and save the voice profile to `~/.agents/voice-core.md`.
+- For portable AGENTS.md-based setups (OpenCode, Codex, Pi Agent, and similar), create `~/.agents/word-smithy/config.md` and save the voice profile to `~/.agents/voice-core.md`.
 - In Claude Code, create `~/.claude/shared/word-smithy/config.md` and save the voice profile to `~/.claude/shared/voice-core.md`.
 - If you cannot tell which harness the user is using, ask one short question before saving anything.
 
