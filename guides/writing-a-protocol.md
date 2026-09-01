@@ -8,6 +8,21 @@ You don't need protocols to use word-smithy. Without them, it still loads your v
 
 Every protocol is a markdown file with YAML frontmatter:
 
+AGENTS.md-based tools:
+
+```yaml
+---
+name: Blog Post Polish
+triggers: polish blog post, final pass, blog cleanup, proofread post
+description: Three-pass polish for a blog post before publishing
+layer: shared
+loads:
+  - ~/.agents/writing-references/zinsser.md
+---
+```
+
+Claude Code:
+
 ```yaml
 ---
 name: Blog Post Polish
@@ -31,7 +46,7 @@ The body of the file is the workflow itself. Write it however makes sense for th
 
 ## Where Protocols Live
 
-**Shared protocols** live in a directory you point to from your shared config (`~/.claude/shared/word-smithy/config.md`). These are available in every project. Good candidates: your blog polish process, your email editing checklist, your social media workflow.
+**Shared protocols** live in a directory you point to from your shared config. Common shared config locations are `~/.agents/word-smithy/config.md` and `~/.claude/shared/word-smithy/config.md`. These are available in every project. Good candidates: your blog polish process, your email editing checklist, your social media workflow.
 
 **Project protocols** live in a directory you point to from your project config (`.word-smithy/config.md`). These only load when you're working inside that project. Good candidates: a card-writing process specific to your product, a release notes workflow, a docs style guide.
 
@@ -69,6 +84,46 @@ Read the draft and answer three questions:
 ### Medium: a multi-pass edit
 
 A structured editing process with reference material loaded.
+
+AGENTS.md-based tools:
+
+```yaml
+---
+name: Blog Post Polish
+triggers: polish blog post, final pass, blog cleanup, proofread post
+description: Three-pass polish for a blog post before publishing
+layer: shared
+loads:
+  - ~/.agents/writing-references/zinsser.md
+---
+
+# Blog Post Polish
+
+## Pass 1: Clarity (with Zinsser loaded)
+
+Read start to finish. For each paragraph:
+- Does this paragraph earn its place?
+- Is the main point clear in the first sentence?
+- Are there words to cut?
+
+Apply the Zinsser reference: strip clutter, use active verbs, cut qualifiers.
+
+## Pass 2: Flow
+
+Read aloud. Listen for:
+- Sentences that all sound the same length
+- Mechanical transitions ("Furthermore," "Additionally")
+- Places where the energy drops
+
+## Pass 3: Voice
+
+Run your voice tests. Ask:
+- Does this sound like me or like a robot?
+- Would I say this to a friend?
+- Is there a line that makes me cringe?
+```
+
+Claude Code:
 
 ```yaml
 ---
@@ -109,6 +164,56 @@ Run your voice tests. Ask:
 ### Complex: an end-to-end creation workflow
 
 A full process that spans multiple phases and loads different references at different steps.
+
+AGENTS.md-based tools:
+
+```yaml
+---
+name: Long-Form Draft
+triggers: write a post, draft a piece, long-form writing, write an essay
+description: Full drafting workflow from outline through polish
+layer: shared
+loads:
+  - ~/.agents/writing-references/mcphee.md
+  - ~/.agents/writing-references/zinsser.md
+---
+
+# Long-Form Draft
+
+## Phase 1: Structure (load McPhee reference)
+
+Before writing a single paragraph:
+- What is the one thing this piece is about?
+- What are the 3-5 sections that build toward that point?
+- What is the opening image or scene?
+- What is the closing line?
+
+Use McPhee's structural thinking: the piece needs a shape,
+not just a sequence.
+
+## Phase 2: Draft
+
+Write the full draft without stopping to edit. Voice profile
+is loaded and active. Don't polish. Get it down.
+
+Rules for this phase:
+- No going back to fix earlier sections
+- Skip transitions (add them in Phase 3)
+- If you get stuck, leave a [TODO] marker and move on
+
+## Phase 3: Polish (load Zinsser reference)
+
+Run the blog polish protocol on the finished draft.
+Apply Zinsser's principles: cut clutter, strengthen verbs,
+remove qualifiers.
+
+## Phase 4: Voice Check
+
+Run the voice check protocol. If it doesn't pass, fix
+the specific sentences that fail.
+```
+
+Claude Code:
 
 ```yaml
 ---

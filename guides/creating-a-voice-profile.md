@@ -133,7 +133,15 @@ Include examples from your actual writing wherever you can. The more examples th
 
 ## Where to Put It
 
-For a voice profile that applies across all your projects:
+For a voice profile that applies across all your projects, save it in your harness's shared location. Common examples:
+
+AGENTS.md-based tools:
+
+```
+~/.agents/voice-core.md
+```
+
+Claude Code:
 
 ```
 ~/.claude/shared/voice-core.md
@@ -146,6 +154,16 @@ For a project-specific voice (a brand voice, a product voice):
 ```
 
 Then point to it in your word-smithy config:
+
+AGENTS.md-based tools:
+
+```yaml
+voice:
+  - ~/.agents/voice-core.md               # shared
+  - docs/voice-profile.md                 # project-specific
+```
+
+Claude Code:
 
 ```yaml
 voice:

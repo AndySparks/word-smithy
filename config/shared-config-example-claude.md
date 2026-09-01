@@ -1,11 +1,11 @@
 ---
-# Shared word-smithy config
+# Shared word-smithy config for Claude Code
 # Place at: ~/.claude/shared/word-smithy/config.md
 #
 # These docs are loaded for every writing task, regardless of project.
 
 voice:
-  - ~/.claude/shared/voice-core.md          # Your universal voice profile
+  - ~/.claude/shared/voice-core.md           # Your universal voice profile
 principles: []                               # Add editorial principles here if you have them
 references:
   - ~/.claude/shared/writing-references/     # Directory of condensed author references

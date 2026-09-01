@@ -108,6 +108,16 @@ The full file should follow this structure:
 
 Drop the file in your shared writing references directory:
 
+AGENTS.md-based tools:
+
+```
+~/.agents/writing-references/zinsser.md
+~/.agents/writing-references/king.md
+~/.agents/writing-references/mcphee.md
+```
+
+Claude Code:
+
 ```
 ~/.claude/shared/writing-references/zinsser.md
 ~/.claude/shared/writing-references/king.md
@@ -115,6 +125,15 @@ Drop the file in your shared writing references directory:
 ```
 
 Then make sure your word-smithy config points to this directory:
+
+AGENTS.md-based tools:
+
+```yaml
+references:
+  - ~/.agents/writing-references/
+```
+
+Claude Code:
 
 ```yaml
 references:

@@ -10,7 +10,7 @@ You write with AI, but every session starts from zero. The AI doesn't know your 
 
 word-smithy is a skill for AI coding assistants that routes any writing task to the right workflow, voice docs, and references. You define your voice once, condense your favorite writing books into structured references, and build repeatable editorial protocols. word-smithy discovers all of it and applies it every time you write.
 
-It works with [Claude Code](https://docs.anthropic.com/en/docs/claude-code), [Codex](https://github.com/openai/codex), and [Cursor](https://cursor.sh).
+It works with [Claude Code](https://docs.anthropic.com/en/docs/claude-code), [Codex](https://github.com/openai/codex), [Cursor](https://cursor.sh), and other AGENTS.md-based tools such as OpenCode and Pi Agent.
 
 For the full story behind word-smithy, see [Smithing Words](https://www.managementcraft.co/dispatches/smithing-words).
 
@@ -22,7 +22,7 @@ For the full story behind word-smithy, see [Smithing Words](https://www.manageme
 npx skills add andysparks/word-smithy
 ```
 
-Supports Claude Code, Codex, Cursor, and [40+ other agents](https://skills.sh).
+Supports Claude Code, Codex, Cursor, OpenCode, Pi Agent, and [40+ other agents](https://skills.sh).
 
 **2. Create a voice profile**
 
@@ -30,7 +30,7 @@ Follow the [Creating a Voice Profile](guides/creating-a-voice-profile.md) guide.
 
 **3. Invoke it**
 
-In Claude Code:
+In your agentic assistant:
 ```
 /word-smithy
 ```
@@ -41,7 +41,7 @@ word-smithy asks what you're working on, matches it to a protocol if one exists,
 
 word-smithy uses layered discovery to find your editorial context:
 
-- **Shared config** (`~/.claude/shared/word-smithy/config.md`): Voice docs, references, and protocols that apply across all your projects.
+- **Shared config**: Voice docs, references, and protocols that apply across all your projects. Common locations include `~/.agents/word-smithy/config.md` and `~/.claude/shared/word-smithy/config.md`.
 - **Project config** (`.word-smithy/config.md` in your project root): Voice docs, references, and protocols specific to one project.
 
 Both layers load together. Project-level configs win when they conflict with shared configs.
@@ -56,7 +56,16 @@ When you invoke `/word-smithy`:
 
 ## Already Have Writing Rules?
 
-If you've already defined voice, tone, or style rules in `CLAUDE.md`, `.cursorrules`, or `.github/copilot-instructions.md`, word-smithy finds and uses them automatically. You don't need to migrate anything. word-smithy layers on top of what you already have.
+If you've already defined voice, tone, or style rules in `AGENTS.md`, `CLAUDE.md`, `.cursorrules`, or `.github/copilot-instructions.md`, word-smithy finds and uses them automatically. You don't need to migrate anything. word-smithy layers on top of what you already have.
+
+## Shared Config Locations
+
+- Portable shared docs for AGENTS.md-based tools: `~/.agents/word-smithy/config.md`
+- Claude Code: `~/.claude/shared/word-smithy/config.md`
+
+These are word-smithy's own shared-doc locations, separate from your harness's global rules file.
+
+If both configs exist, word-smithy uses `~/.agents/word-smithy/config.md`.
 
 ## Guides
 
@@ -68,7 +77,21 @@ If you've already defined voice, tone, or style rules in `CLAUDE.md`, `.cursorru
 
 word-smithy uses two config files, both optional:
 
-**Shared** (`~/.claude/shared/word-smithy/config.md`):
+**Shared** (use your harness's shared config location):
+
+AGENTS.md-based tools:
+
+```yaml
+voice:
+  - ~/.agents/voice-core.md
+references:
+  - ~/.agents/writing-references/
+protocols:
+  - ~/.agents/my-editing-process.md
+```
+
+Claude Code:
+
 ```yaml
 voice:
   - ~/.claude/shared/voice-core.md
@@ -86,11 +109,30 @@ protocols:
   - docs/editorial/
 ```
 
-See [config examples](config/) for full templates.
+See the [AGENTS.md-based shared config example](config/shared-config-example-agents.md), the [Claude Code shared config example](config/shared-config-example-claude.md), and the [project config example](config/project-config-example.md).
 
 ## Protocol Format
 
 Protocols are markdown files with YAML frontmatter:
+
+AGENTS.md-based tools:
+
+```yaml
+---
+name: Blog Post Polish
+triggers: polish blog post, final pass, blog cleanup
+description: Three-pass polish for a blog post before publishing
+layer: shared
+loads:
+  - ~/.agents/writing-references/zinsser.md
+---
+
+# Blog Post Polish
+
+[Your workflow steps here]
+```
+
+Claude Code:
 
 ```yaml
 ---
@@ -107,7 +149,7 @@ loads:
 [Your workflow steps here]
 ```
 
-See the [example protocol](examples/example-protocol.md) and the [Writing a Protocol](guides/writing-a-protocol.md) guide.
+See the [AGENTS.md-based example protocol](examples/example-protocol-agents.md), the [Claude Code example protocol](examples/example-protocol-claude.md), and the [Writing a Protocol](guides/writing-a-protocol.md) guide.
 
 ## Contributing
 
